@@ -24,7 +24,7 @@ class AddPost extends Component {
     
         return (
             <div>
-                <SiteMenu />
+                 <SiteMenu/>
     
                 <Container text style={{ marginTop: '4em' }}>
                     <Header as='h1'>Add New Post</Header>

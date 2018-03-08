@@ -4,6 +4,7 @@ import axios from 'axios';
 import Posts from './Posts';
 import SiteMenu from './SiteMenu';
 
+
 class Blog extends Component {
     state = {
         posts: []
@@ -20,7 +21,7 @@ class Blog extends Component {
     render() {
         return (
             <div>
-                <SiteMenu />
+                <SiteMenu/>
 
                 <Container text style={{ marginTop: '4em' }}>
                     <Header as='h1'>Posts</Header>

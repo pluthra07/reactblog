@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Container, Header} from 'semantic-ui-react';
 import SiteMenu from './SiteMenu';
 import PostCard from './PostCard';
 import Loading from './Loading';
@@ -24,18 +25,23 @@ class ViewPost extends Component {
     render() {
         console.log(this.props);
         return (
+            
             <div>
-                <SiteMenu />
-                <h1>Viewing Post {this.state.post.id}</h1>
+                <SiteMenu/>
+
                 
-                {
+                <Container text style={{ marginTop: '4em' }}>
+                    <Header as='h1'>Viewing Post {this.state.post.id}</Header>
+                    {
                     !this.state.post.id ? <Loading/> : (
                         <PostCard post={this.state.post} />
                     )
 
                 }
-                
+                </Container>
             </div>
+
+            
         );
     }
 
