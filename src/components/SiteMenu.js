@@ -10,11 +10,11 @@ class SiteMenu extends Component {
         return (
             <div>
                 <Menu fixed='top' inverted>
-                 <Container>
-                 <Menu.Item as={NavLink} exact to="/posts" content="Post"/>
-                 <Menu.Item as={NavLink} exact to="/add" content="Add New Post"/>
-        </Container>
-      </Menu>
+                    <Container>
+                        <Menu.Item as={NavLink} exact to="/posts" content="Post"/>
+                        <Menu.Item as={NavLink} exact to="/add" content="Add New Post"/>
+                    </Container>
+                </Menu>
             </div>
         );
     }
