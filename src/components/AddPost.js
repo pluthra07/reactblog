@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Form, Input, TextArea, Button, Container, Header} from 'semantic-ui-react';
+import { Form, Input, TextArea, Button, Container, Header } from 'semantic-ui-react';
 import SiteMenu from './SiteMenu';
 
 class AddPost extends Component {
