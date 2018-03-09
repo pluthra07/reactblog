@@ -1,40 +1,68 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router';
 import { Form, Input, TextArea, Button, Container, Header } from 'semantic-ui-react';
 import SiteMenu from './SiteMenu';
 
 class AddPost extends Component {
-    state = { }
+    
+    state = {
+        redirect: false
+    }
+
     addSinglePost = (e) => {
         e.preventDefault();
-        console.log('lets submit the form!');
+        
+        //form data
+        let data = new FormData();
+
+        data.append('title', e.target.title.value);
+        data.append('body', e.target.description.value);
+        data.append('userId', '1');
+        
+        //this is required to make the state available inside the axios post
+        var self = this;
+
         axios.post('https://jsonplaceholder.typicode.com/posts', {
-            title: 'foo',
-            body: 'bar',
-            userId: 1
+            data: data
           })
           .then(function (response) {
+            
             console.log(response);
+            //console.log(response.status);
+            response.status = "201" && (
+                //let's redirect                
+                self.setState({ redirect: true })
+                
+            );
           })
           .catch(function (error) {
             console.log(error);
           });
     }
     render() {
-    
+
+        const { redirect } = this.state;
+
         return (
             <div>
-                 <SiteMenu/>
-    
-                <Container text style={{ marginTop: '4em' }}>
-                    <Header as='h1'>Add New Post</Header>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean malesuada sapien at orci ultrices rutrum. Donec sit amet sodales mauris. Pellentesque lobortis posuere tristique.</p>
-                    <Form onSubmit={this.addSinglePost}>
-                            <Form.Field id='form-input-control-title' control={Input} label='Post Title' placeholder='Post Title' />
-                            <Form.Field id='form-textarea-control-description' control={TextArea} label='Post Description' placeholder='Enter Your Post Description' />
-                            <Form.Field id='form-button-control-public' control={Button} content='Submit New Post' />
-                    </Form>
-                </Container>
+            {
+                redirect ? <Redirect to='/posts'/> : (
+
+                    <div><SiteMenu/>
+	    
+	                <Container text style={{ marginTop: '4em' }}>
+	                    <Header as='h1'>Add New Post</Header>
+	                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean malesuada sapien at orci ultrices rutrum. Donec sit amet sodales mauris. Pellentesque lobortis posuere tristique.</p>
+	                    <Form onSubmit={this.addSinglePost}>
+	                            <Form.Field id='form-input-control-title' name='title' control={Input} label='Post Title' placeholder='Post Title' />
+	                            <Form.Field id='form-textarea-control-description' name='description' control={TextArea} label='Post Description' placeholder='Enter Your Post Description' />
+	                            <Form.Field id='form-button-control-public' control={Button} content='Submit New Post' />
+	                    </Form>
+	                </Container></div>
+
+                )
+            }
             </div>
         );
     }
