@@ -11,12 +11,14 @@ class Blog extends Component {
         
     }
     componentDidMount = () => {
+        //setTimeout(() => {
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then((response)=> {
                 this.setState({
                     posts: response.data,
                 })
             })
+        //}, 2000);
     }
     render() {
         return (
