@@ -3,16 +3,17 @@ import axios from 'axios';
 import { Redirect } from 'react-router';
 import { Form, Input, TextArea, Button, Container, Header } from 'semantic-ui-react';
 import SiteMenu from './SiteMenu';
+import ModalConfirmation from './ModalConfirmation';
 
 class AddPost extends Component {
     
     state = {
-        redirect: false
+        redirect: false,
+        isOpen: false
     }
-
-    addSinglePost = (e) => {
-        e.preventDefault();
-        
+    postSuccess = () => {
+    } 
+    addSinglePost = (e) => {        
         //form data
         let data = new FormData();
 
@@ -32,8 +33,7 @@ class AddPost extends Component {
             //console.log(response.status);
             response.status = "201" && (
                 //let's redirect                
-                self.setState({ redirect: true })
-                
+                self.setState({ redirect: false, isOpen: true })
             );
           })
           .catch(function (error) {
@@ -43,13 +43,17 @@ class AddPost extends Component {
     render() {
 
         const { redirect } = this.state;
+        const { isOpen } = this.state;
+
+        console.log(isOpen);
 
         return (
             <div>
             {
-                redirect ? <Redirect to='/posts'/> : (
+                redirect ? <Redirect to='/posts'/>  : (
 
-                    <div><SiteMenu/>
+                    <div>  
+                    <SiteMenu/>
 	    
 	                <Container text style={{ marginTop: '4em' }}>
 	                    <Header as='h1'>Add New Post</Header>
@@ -59,7 +63,13 @@ class AddPost extends Component {
 	                            <Form.Field id='form-textarea-control-description' name='description' control={TextArea} label='Post Description' placeholder='Enter Your Post Description' />
 	                            <Form.Field id='form-button-control-public' control={Button} content='Submit New Post' />
 	                    </Form>
-	                </Container></div>
+	                </Container>
+                    
+                    {
+                        isOpen && (<ModalConfirmation/>)
+                    } 
+
+                    </div>
 
                 )
             }

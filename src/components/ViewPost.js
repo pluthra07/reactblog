@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Container, Header, Button, Divider } from 'semantic-ui-react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SiteMenu from './SiteMenu';
 import PostCard from './PostCard';
 import Loading from './Loading';
