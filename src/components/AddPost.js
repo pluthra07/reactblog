@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 import { Form, Input, TextArea, Button, Container, Header } from 'semantic-ui-react';
 import SiteMenu from './SiteMenu';
 import ModalConfirmation from './ModalConfirmation';
+import serializeForm from 'form-serialize';
 
 class AddPost extends Component {
     
@@ -15,11 +16,14 @@ class AddPost extends Component {
     } 
     addSinglePost = (e) => {        
         //form data
-        let data = new FormData();
+        //let data = new FormData();
+        //data.append('title', e.target.title.value);
+        //data.append('body', e.target.description.value);
+        //data.append('userId', '1');
 
-        data.append('title', e.target.title.value);
-        data.append('body', e.target.description.value);
-        data.append('userId', '1');
+        //serialized form data using form-serialize
+        let data = serializeForm(e.target, { hash: true });
+
         
         //this is required to make the state available inside the axios post
         var self = this;
